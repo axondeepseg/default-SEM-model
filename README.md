@@ -1,5 +1,5 @@
 # default-SEM-model
-AxonDeepSeg default SEM model and testing image
+AxonDeepSeg default SEM model and testing image. This model works at a resolution of 0.1 micrometer per pixel and was trained on rat spinal cord data collected via a Scanning Electron Microscope (SEM).
 
 # Steps to train this model
 1. Get ADS version: [[b05a40a]](https://github.com/neuropoly/axondeepseg/commit/b05a40aa03979a83313fe8704ee389672ed26ed7)
