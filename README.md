@@ -2,7 +2,7 @@
 ---
 
 ## Model overview
-(image of segmentation obtained from this model)
+![image of segmentation obtained from this model](sem_model_preview.png)
 
 AxonDeepSeg default SEM model and testing image. This model works at a resolution of 0.1 micrometer per pixel and was trained on rat spinal cord data collected via a Scanning Electron Microscope (SEM).
 
