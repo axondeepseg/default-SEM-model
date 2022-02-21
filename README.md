@@ -40,6 +40,8 @@ To train the model, please first update the following fields in the json trainin
 - `path_data`: full path to training data
 - `gpu_ids`: specific to your hardware
 - `path_output`: where the model will be saved
+- `bids_config`: full path to the custom bids config located in `ivadomed/config/config_bids.json`
+
 Then, you can train the model with
 ```
 ivadomed --train -c path/to/model_seg_rat_axon-myelin_sem.json
