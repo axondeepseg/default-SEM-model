@@ -44,5 +44,5 @@ ivadomed --test -c path_to_config_file.json
 ## Segment with this model
 To segment an image using this model, use
 ```
-axondeepseg -t SEM -i <IMG_PATH> -m <path_to_model_folder> -s <PIXEL_SIZE>
+axondeepseg -t SEM -i <IMG_PATH> -s <PIXEL_SIZE>
 ```
