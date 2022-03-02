@@ -11,7 +11,7 @@ AxonDeepSeg default SEM model and testing image. This model works at a resolutio
 - [axondeepseg](https://axondeepseg.readthedocs.io/en/latest/) commit: 805868e39eddf620c9f3d60d313cadffb1121bfb
 
 ## Segment (ADS)
-To segment an image using this model, use
+To segment an image using this model, use the following command in an `axondeepseg` virtual environment:
 ```
 axondeepseg -t SEM -i <IMG_PATH> -s <PIXEL_SIZE>
 ```
@@ -20,7 +20,7 @@ The `-m` option can be omitted in this case because this is a default built-in m
 ## Train and test (ivadomed)
 
 ### Clone this repository
-In order to train this model, you will need the json configuration file located in this repo.
+This model was trained with `ivadomed`, which is included in the `axondeepseg` venv. Otherwise, make sure you have it installed separately. You will need the *model_seg_rat_axon-myelin_sem.json* configuration file located in this repo.
 ```
 git clone https://github.com/axondeepseg/default-SEM-model
 ```
@@ -32,15 +32,17 @@ The SEM dataset used to train this model is hosted on github:
 
 ```
 git clone https://github.com/axondeepseg/data_axondeepseg_sem
+cd data_axondeepseg_sem
+git checkout d7884f9ab6cd8f06cba4885e752988a7706f0ede
 ```
 
 ### Train this model
-To train the model, please first update the following fields in the json training config file:
-- `fname_split`: full path to the split_dataset.joblib file
-- `path_data`: full path to training data
+To train the model, please first update the following fields in the aforementioned json configuration file:
 - `gpu_ids`: specific to your hardware
 - `path_output`: where the model will be saved
-- `bids_config`: full path to the custom bids config located in `ivadomed/config/config_bids.json`
+- `loader_parameters:path_data`: path to training data
+- `loader_parameters:bids_config`: path to the custom bids config located in `ivadomed/config/config_bids.json`; if you are inside an ADS virtual environment, you will need to navigate to the venv directory which should look something like this: `./miniconda/envs/ads_venv/lib/python3.8/site-packages/ivadomed/`
+- `split_dataset:fname_split`: path to the split_dataset.joblib file
 
 Then, you can train the model with
 ```
@@ -52,4 +54,4 @@ To test the model, use
 ```
 ivadomed --test -c path_to_config_file.json
 ```
-
+The evaluation results will be saved in `"path_output"/results_eval/evaluation_3Dmetrics.csv`
