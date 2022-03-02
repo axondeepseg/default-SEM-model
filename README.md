@@ -48,7 +48,7 @@ To train the model, please first update the following fields in the aforemention
 - `gpu_ids`: specific to your hardware
 - `path_output`: where the model will be saved
 - `loader_parameters:path_data`: path to training data
-- `loader_parameters:bids_config`: path to the custom bids config located in `ivadomed/config/config_bids.json`; if you are inside an ADS virtual environment, you will need to navigate to the venv directory which should look something like this: `./miniconda/envs/ads_venv/lib/python3.8/site-packages/ivadomed/`
+- `loader_parameters:bids_config`: path to the custom bids config located in `ivadomed/config/config_bids.json`
 - `split_dataset:fname_split`: path to the split_dataset.joblib file
 
 Then, you can train the model with
