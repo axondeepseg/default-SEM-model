@@ -57,8 +57,8 @@ ivadomed --train -c path/to/model_seg_rat_axon-myelin_sem.json
 ```
 The trained model file will be saved under the `path_output` directory.
 
-### Test this model
-To test the model, use
+### Evaluate this model
+To test the performance of this model, use
 ```
 ivadomed --test -c path_to_config_file.json
 ```
