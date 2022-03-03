@@ -6,10 +6,6 @@
 
 AxonDeepSeg default SEM model and testing image. This model works at a resolution of 0.1 micrometer per pixel and was trained on rat spinal cord data collected via a Scanning Electron Microscope (SEM).
 
-## Dependencies
-- [ivadomed](https://ivadomed.org/) commit: e6554281d07b5afef9e68ce8b02e86b02bd68363
-- [axondeepseg](https://axondeepseg.readthedocs.io/en/latest/) commit: 805868e39eddf620c9f3d60d313cadffb1121bfb
-
 ## Segment (ADS)
 To segment an image using this model, use the following command in an `axondeepseg` virtual environment:
 ```
