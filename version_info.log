@@ -1,0 +1,37 @@
+IVADOMED TOOLBOX
+----------------
+(git-HEAD-55fc2067cbb9c97a711e32cf8b5a377fb6d517be*)
+
+
+DATASET VERSION
+---------------
+The following BIDS dataset(s) were used for training.
+1. ../data_extrassd_maboudb/20210816_optim_sem/data_axondeepseg_sem/ - Dataset Annex version: 1cddcc6bef21782b22ff17f34502c6e90e22c504
+
+
+SYSTEM INFO
+-------------
+OS: linux (Linux-5.4.0-88-generic-x86_64-with-glibc2.27)
+CPU cores: Available: 40
+
+
+
+
+CONFIG INPUTS
+-------------
+command: test
+gpu_ids: [6]
+path_output: ../data_extrassd_maboudb/20210816_optim_sem/20211010_log_sem-loss-name-BinaryCrossEntropyLoss-scheduler-initial_lr-0.005-lr_scheduler-name-CosineAnnealingLR
+model_name: model_seg_rat_axon-myelin_sem
+debugging: True
+log_file: log
+object_detection_params: {'object_detection_path': None, 'safety_factor': [1.0, 1.0, 1.0], 'gpu_ids': 6, 'path_output': '../data_extrassd_maboudb/20210816_optim_sem/20211010_log_sem-loss-name-BinaryCrossEntropyLoss-scheduler-initial_lr-0.005-lr_scheduler-name-CosineAnnealingLR'}
+loader_parameters: {'path_data': ['../data_extrassd_maboudb/20210816_optim_sem/data_axondeepseg_sem/'], 'subject_selection': {'n': [], 'metadata': [], 'value': []}, 'target_suffix': ['_seg-axon-manual', '_seg-myelin-manual'], 'extensions': ['.png'], 'roi_params': {'suffix': None, 'slice_filter_roi': None}, 'contrast_params': {'training_validation': ['SEM'], 'testing': ['SEM'], 'balance': {}}, 'slice_filter_params': {'filter_empty_mask': False, 'filter_empty_input': True}, 'slice_axis': 'axial', 'multichannel': False, 'soft_gt': False, 'is_input_dropout': False, 'bids_config': 'ivadomed/config/config_bids.json'}
+split_dataset: {'fname_split': '../data_extrassd_maboudb/20210816_optim_sem/config/split_datasets.joblib', 'random_seed': 1461, 'split_method': 'sample_id', 'data_testing': {'data_type': 'sample_id', 'data_value': ['sample-data15']}, 'balance': None, 'train_fraction': 0.7, 'test_fraction': 0.1}
+training_parameters: {'batch_size': 4, 'loss': {'name': 'BinaryCrossEntropyLoss'}, 'training_time': {'num_epochs': 150, 'early_stopping_patience': 50, 'early_stopping_epsilon': 0.001}, 'scheduler': {'initial_lr': 0.005, 'lr_scheduler': {'name': 'CosineAnnealingLR', 'base_lr': 1e-05, 'max_lr': 0.01}}, 'balance_samples': {'applied': False, 'type': 'gt'}, 'mixup_alpha': None, 'transfer_learning': {'retrain_model': None, 'retrain_fraction': 1.0, 'reset': True}}
+default_model: {'name': 'Unet', 'dropout_rate': 0.2, 'bn_momentum': 0.1, 'depth': 4, 'is_2d': True, 'final_activation': 'sigmoid', 'length_2D': [256, 256], 'stride_2D': [244, 244]}
+uncertainty: {'epistemic': False, 'aleatoric': False, 'n_it': 0}
+postprocessing: {'binarize_maxpooling': {}}
+evaluation_parameters: {}
+transformation: {'Resample': {'wspace': 0.0001, 'hspace': 0.0001}, 'RandomAffine': {'degrees': 2.5, 'scale': [0.05, 0.05], 'translate': [0.015, 0.015], 'applied_to': ['im', 'gt'], 'dataset_type': ['training']}, 'ElasticTransform': {'alpha_range': [100.0, 150.0], 'sigma_range': [4.0, 5.0], 'p': 0.5, 'applied_to': ['im', 'gt'], 'dataset_type': ['training']}, 'NormalizeInstance': {'applied_to': ['im']}}
+training_sha256: {'sub-rat3_sample-data10_SEM.png': 'd402873851fa675b0bbaeff8ab752e92e0b8159834f416c4428f78a15883f5ce', 'sub-rat3_sample-data9_SEM.png': '067af38d7f98cb7eef988d38c8821af7dc33c73146e79eeff66dc9349a336c47', 'sub-rat4_sample-data12_SEM.png': 'd121f05fe9f03458b4dd9a9e4f0fdeba64e5cbd97ec4584415931144e012b764', 'sub-rat2_sample-data5_SEM.png': 'e878e6d412e0a674a67f57f983a97eac70edc41e04ab222ef4338d2653377a95', 'sub-rat8_sample-V915_SEM.png': '433687677047cc3a2966a27c35325eaef89420fa0b0301d017892f70e3d87fdd', 'sub-rat7_sample-Maxo03img60_SEM.png': '952014851a21ad3cce229d8ba72ea935ad762bbe3bfb48e5f5b972971f57f566', 'sub-rat3_sample-data11_SEM.png': 'a3fac42bb940fe20371167bc64bae94e47f8551dd699357122c161b39d9fa9e1'}

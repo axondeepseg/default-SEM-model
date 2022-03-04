@@ -14,13 +14,7 @@ axondeepseg -t SEM -i <IMG_PATH> -s <PIXEL_SIZE>
 The `-m` option can be omitted in this case because this is a default built-in model.
 
 ## Train and test (ivadomed)
-This model was trained and tested with `ivadomed` on commit **e65542**. We recommand to install ivadomed in a separate virtual environment to reproduce the original training steps. Inside your venv, make sure you are on the right commit:
-```
-git clone https://github.com/neuropoly/ivadomed.git
-cd ivadomed
-git checkout e6554281d07b5afef9e68ce8b02e86b02bd68363
-pip install -e .
-```
+This model was trained and tested with `ivadomed`. We recommand to install ivadomed in a separate virtual environment to reproduce the original training steps. The specific revision hash of the version used for training is documented in the *version_info.log* file.
 
 ### Clone this repository
 You will need the *model_seg_rat_axon-myelin_sem.json* configuration file located in this repo.
@@ -29,15 +23,7 @@ git clone https://github.com/axondeepseg/default-SEM-model
 ```
 
 ### Get the data
-The SEM dataset used to train this model is hosted on github:
-- https://github.com/axondeepseg/data_axondeepseg_sem
-- commit d7884f9ab6cd8f06cba4885e752988a7706f0ede
-
-```
-git clone https://github.com/axondeepseg/data_axondeepseg_sem
-cd data_axondeepseg_sem
-git checkout d7884f9ab6cd8f06cba4885e752988a7706f0ede
-```
+The SEM dataset used to train this model is hosted on github [here](https://github.com/axondeepseg/data_axondeepseg_sem). The specific dataset revision hash is documented in the *version_info.log* file.
 
 ### Train this model
 To train the model, please first update the following fields in the aforementioned json configuration file:
@@ -51,7 +37,7 @@ Then, you can train the model with
 ```
 ivadomed --train -c path/to/model_seg_rat_axon-myelin_sem.json
 ```
-The trained model file will be saved under the `path_output` directory.
+The trained model file will be saved under the `path_output` directory. For more information about training models in `ivadomed`, please refer to the following [tutorial](https://ivadomed.org/tutorials/two_class_microscopy_seg_2d_unet.html).
 
 ### Evaluate this model
 To test the performance of this model, use
