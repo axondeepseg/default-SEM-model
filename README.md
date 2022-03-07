@@ -23,7 +23,7 @@ git clone https://github.com/axondeepseg/default-SEM-model
 ```
 
 ### Get the data
-The SEM dataset used to train this model is hosted on github [here](https://github.com/axondeepseg/data_axondeepseg_sem). The specific dataset revision hash is documented in the *version_info.log* file.
+The SEM dataset used to train this model is hosted on github [here](https://github.com/axondeepseg/data_axondeepseg_sem). The specific dataset revision hash used for training is documented in the *version_info.log* file.
 
 ### Train this model
 To train the model, please first update the following fields in the aforementioned json configuration file:
