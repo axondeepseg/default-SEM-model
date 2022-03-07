@@ -14,7 +14,7 @@ axondeepseg -t SEM -i <IMG_PATH> -s <PIXEL_SIZE>
 The `-m` option can be omitted in this case because this is a default built-in model.
 
 ## Train and test (ivadomed)
-This model was trained and tested with `ivadomed`. We recommand to install ivadomed in a separate virtual environment to reproduce the original training steps. The specific revision hash of the version used for training is documented in the *version_info.log* file.
+This model was trained and tested with [ivadomed](https://ivadomed.org). We recommend you install ivadomed in a virtual environment to reproduce the original training steps. The specific revision hash of the version used for training is documented in the *version_info.log* file.
 
 ### Clone this repository
 You will need the *model_seg_rat_axon-myelin_sem.json* configuration file located in this repo.
@@ -26,7 +26,7 @@ git clone https://github.com/axondeepseg/default-SEM-model
 The SEM dataset used to train this model is hosted on GitHub [here](https://github.com/axondeepseg/data_axondeepseg_sem). The specific dataset revision hash used for training is documented in the *version_info.log* file.
 
 ### Train this model
-To train the model, please first update the following fields in the aforementioned json configuration file:
+To train the model, please first update the following fields in the aforementioned JSON configuration file:
 - `gpu_ids`: specific to your hardware
 - `path_output`: where the model will be saved
 - `loader_parameters:path_data`: path to training data
