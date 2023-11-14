@@ -45,3 +45,58 @@ To test the performance of this model, use
 ivadomed --test -c path_to_config_file.json
 ```
 The evaluation results will be saved in `"path_output"/results_eval/evaluation_3Dmetrics.csv`
+
+
+## Train and test with nnUNetv2
+
+### Structure of the `nn_unet_scripts` Directory
+
+This directory contains the following components:
+
+- **Conversion Script**: This script is responsible for converting the Touching Myelin Boundary Detection Dataset from the BIDS format to the format expected by nnUNetv2. To run execute the following command: 
+```bash
+python scripts/convert_from_bids_to_nnunetv2_format.py <PATH/TO/ORIGINAL/DATASET> --TARGETDIR <PATH/TO/NEW/DATASET>
+```
+- **Train Test Split File**: This file is a JSON file that contains the training and testing split for the dataset. It is used by the conversion script above. The file should be named `train_test_split.json` and placed in the same directory as the dataset.
+
+
+
+### Getting Started
+
+To set up the environment and run the scripts, follow these steps:
+
+1. Create a new conda environment:
+```bash
+conda create --name sem_seg
+```
+2. Activate the environment:
+```bash
+conda activate sem_seg
+```
+3. Install PyTorch, torchvision, and torchaudio. For NeuroPoly lab members using the GPU servers, use the following command:
+```bash
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+```
+For others, please refer to the PyTorch installation guide at https://pytorch.org/get-started/locally/ to get the appropriate command for your system.
+4. Update the environment with the remaining dependencies:
+```bash
+conda env update --file environment.yaml
+```
+5. Run the conversion script (the default target directory is the current working directory):
+```bash
+export RESULTS_DIR="<PATH/TO/SAVE/RESULTS>"
+```
+6. Set up the necessary environment variables:
+```bash
+python scripts/convert_from_bids_to_nnunetv2_format.py <PATH/TO/ORIGINAL/DATASET> --TARGETDIR $RESULTS_DIR
+```
+7. Set up the necessary environment variables:
+```bash
+export nnUNet_raw="$RESULTS_DIR/nnUNet_raw"
+export nnUNet_preprocessed="$RESULTS_DIR/nnUNet_preprocessed"
+export nnUNet_results="$RESULTS_DIR/nnUNet_results"
+```
+8. Run the nnUNet preprocessing command:
+```bash
+nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity
+```
