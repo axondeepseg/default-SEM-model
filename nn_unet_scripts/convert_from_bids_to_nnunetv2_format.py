@@ -125,6 +125,7 @@ def process_labels(
     dataset_name : str
         Name of the dataset.
     """
+    label_type_to_divisor = {"axonmyelin": 127, "myelin": 255, "axon": 255}
     for subject in particpant_to_sample_dict.keys():
         for image in particpant_to_sample_dict[subject]:
             case_id = bids_to_nnunet_dict[str((subject, image))]
@@ -136,9 +137,10 @@ def process_labels(
                 "micr",
                 f"{subject}_{image}_SEM_seg-{label_type}-manual.png",
             )
-            label = cv2.imread(str(label_path), cv2.IMREAD_GRAYSCALE)
-            mapping_dict = {0: 0, 127: 1, 128: 1, 130: 1, 233: 2, 255: 2}
-            label = np.vectorize(mapping_dict.get)(label)
+            label = np.round(
+                cv2.imread(str(label_path), cv2.IMREAD_GRAYSCALE)
+                / label_type_to_divisor[label_type]
+            )
             fname = f"{dataset_name}_{case_id:03d}.png"
             cv2.imwrite(os.path.join(out_folder, "labelsTr", fname), label)
 
@@ -211,6 +213,7 @@ def main(args):
     datapath = Path(args.DATAPATH)
     target_dir = Path(args.TARGETDIR)
     train_test_split_path = Path(args.SPLITJSON)
+    label_type = args.LABELTYPE
 
     out_folder = os.path.join(target_dir, "nnUNet_raw", f"Dataset001_{dataset_name}")
     create_directories(out_folder, ["imagesTr", "labelsTr", "imagesTs"])
@@ -240,7 +243,11 @@ def main(args):
     dataset_info = {
         "name": dataset_name,
         "description": description,
-        "labels": {"background": 0, "myelin": 1, "axon": 2},
+        "labels": {"background": 0, "myelin": 1, "axon": 2}
+        if label_type == "axonmyelin"
+        else {"background": 0, "myelin": 1}
+        if label_type == "myelin"
+        else {"background": 0, "axon": 1},
         "channel_names": {"0": "rescale_to_0_1"},
         "numTraining": len(
             [
@@ -274,7 +281,7 @@ def main(args):
         train_participant_to_sample_dict,
         bids_to_nnunet_dict,
         dataset_name,
-        label_type=args.LABELTYPE,
+        label_type=label_type,
     )
     process_images(
         datapath,
