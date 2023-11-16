@@ -124,6 +124,8 @@ def process_labels(
         Dictionary mapping subject names to case IDs.
     dataset_name : str
         Name of the dataset.
+    label_type : Literal["axonmyelin", "myelin", "axon"], optional
+        Type of label to use. Options are 'axonmyelin', 'myelin', or 'axon'. Defaults to 'axonmyelin'.
     """
     label_type_to_divisor = {"axonmyelin": 127, "myelin": 255, "axon": 255}
     for subject in particpant_to_sample_dict.keys():
