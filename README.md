@@ -116,10 +116,10 @@ source nn_unet_scripts/setup_nnunet.sh <PATH/TO/ORIGINAL/DATASET> <PATH/TO/SAVE/
 ### Training nnUNet
 
 After setting up the nnUNet and preprocessing the dataset, you can train the model using the training script. The script requires the following arguments:
-- DATASET_ID: The ID of the dataset to be used for training. This should be an integer.
-- DATASET_NAME: The name of the dataset. This will be used to form the full dataset name in the format "DatasetNUM_DATASET_NAME".
-- DEVICE: The device to be used for training. This could be a GPU device ID or 'cpu' for CPU, 'mps' for M1/M2 or 'cuda' for any GPU.
-- FOLDS: The folds to be used for training. This should be a space-separated list of integers.
+- `DATASET_ID`: The ID of the dataset to be used for training. This should be an integer.
+- `DATASET_NAME`: The name of the dataset. This will be used to form the full dataset name in the format "DatasetNUM_DATASET_NAME".
+- `DEVICE`: The device to be used for training. This could be a GPU device ID or 'cpu' for CPU, 'mps' for M1/M2 or 'cuda' for any GPU.
+- `FOLDS`: The folds to be used for training. This should be a space-separated list of integers.
 To run the training script, execute the following command:
 ```bash
 ./nn_unet_scripts/train_nnunet.sh <DATASET_ID> <DATASET_NAME> <DEVICE> <FOLDS...>
