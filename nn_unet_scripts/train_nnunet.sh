@@ -8,19 +8,28 @@
 # located in: https://github.com/ivadomed/utilities/blob/main/scripts/run_nnunet.sh
 #
 
-config="2d"                     
-dataset_id=1   
-dataset_name=Dataset001_SEM     
-nnunet_trainer="nnUNetTrainer"
-DEVICE=$1 # No default device
+# This script is used to train nnUNet on multiple folds.
+# It takes four arguments:
+# 1. DATASET_ID: The ID of the dataset to be used for training. This should be an integer.
+# 2. DATASET_NAME: The name of the dataset. This will be used to form the full dataset name in the format "DatasetNUM_DATASET_NAME".
+# 3. DEVICE: The device to be used for training. This could be a GPU device ID or 'cpu' for CPU.
+# 4. FOLDS: The folds to be used for training. This should be a space-separated list of integers.
+# Example usage: ./nn_unet_scripts/train_nnunet.sh 1 SEM 0 0 1 2 3 4
 
-# Check if the optional argument (folds) is provided
-if [ "$#" -eq 1 ]; then
-    folds=()
-else
-    # Convert the argument to an array of folds
-    folds=("${@:2}") # Skip the first argument (DEVICE)
+config="2d"                     
+dataset_id=$1   
+dataset_name="Dataset$(printf "%03d" $dataset_id)_$2"     
+nnunet_trainer="nnUNetTrainer"
+DEVICE=$3 # No default device
+
+# Check if the required arguments (dataset_id, dataset_name, folds) are provided
+if [ "$#" -lt 4 ]; then
+    echo "Usage: $0 DATASET_ID DATASET_NAME DEVICE FOLDS"
+    exit 1
 fi
+
+# Convert the argument to an array of folds
+folds=("${@:4}") # Skip the first three arguments (DATASET_ID, DATASET_NAME, DEVICE)
 
 for fold in ${folds[@]}; do
     echo "-------------------------------------------"
