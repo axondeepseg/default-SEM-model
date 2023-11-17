@@ -216,8 +216,11 @@ def main(args):
     target_dir = Path(args.TARGETDIR)
     train_test_split_path = Path(args.SPLITJSON)
     label_type = args.LABELTYPE
+    dataset_id = str(args.DATASETID).zfill(3)
 
-    out_folder = os.path.join(target_dir, "nnUNet_raw", f"Dataset001_{dataset_name}")
+    out_folder = os.path.join(
+        target_dir, "nnUNet_raw", f"Dataset{dataset_id}_{dataset_name}"
+    )
     create_directories(out_folder, ["imagesTr", "labelsTr", "imagesTs"])
 
     bids_to_nnunet_dict = create_bids_to_nnunet_dict(
@@ -326,6 +329,12 @@ if __name__ == "__main__":
         "--LABELTYPE",
         default="axonmyelin",
         help="Type of label to use. Options are 'axonmyelin', 'myelin', or 'axon'. Defaults to 'axonmyelin'",
+    )
+    parser.add_argument(
+        "--DATASETID",
+        default=1,
+        type=int,
+        help="ID of the dataset. This ID is formatted with 3 digits. For example, 1 becomes '001', 23 becomes '023', etc. Defaults to 1",
     )
     args = parser.parse_args()
     main(args)
