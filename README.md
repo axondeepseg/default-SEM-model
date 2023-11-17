@@ -45,3 +45,51 @@ To test the performance of this model, use
 ivadomed --test -c path_to_config_file.json
 ```
 The evaluation results will be saved in `"path_output"/results_eval/evaluation_3Dmetrics.csv`
+
+
+## Train and test with nnUNetv2
+
+### Structure of the `nn_unet_scripts` Directory
+
+This directory contains the following components:
+
+- **Conversion Script**: This script is responsible for converting the Touching Myelin Boundary Detection Dataset from the BIDS format to the format expected by nnUNetv2. To run execute the following command: 
+```bash
+python scripts/convert_from_bids_to_nnunetv2_format.py <PATH/TO/ORIGINAL/DATASET> --TARGETDIR <PATH/TO/NEW/DATASET>
+```
+- **Train Test Split File**: This file is a JSON file that contains the training and testing split for the dataset. It is used by the conversion script above. The file should be named `train_test_split.json` and placed in the same directory as the dataset.
+
+
+
+### Setting Up Conda Environment
+
+To set up the environment and run the scripts, follow these steps:
+
+1. Create a new conda environment:
+```bash
+conda create --name sem_seg
+```
+2. Activate the environment:
+```bash
+conda activate sem_seg
+```
+3. Install PyTorch, torchvision, and torchaudio. For NeuroPoly lab members using the GPU servers, use the following command:
+```bash
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+```
+For others, please refer to the PyTorch installation guide at https://pytorch.org/get-started/locally/ to get the appropriate command for your system.
+
+4. Update the environment with the remaining dependencies:
+```bash
+conda env update --file environment.yaml
+```
+### Setting Up nnUNet
+1. Activate the environment:
+```bash
+conda activate sem_seg
+```
+
+2. To train the model, first, you need to set up nnUNet and preprocess the dataset. This can be done by running the setup script:
+```bash
+source nn_unet_scripts/setup_nnunet.sh <PATH/TO/ORIGINAL/DATASET> <PATH/TO/SAVE/RESULTS>
+```
