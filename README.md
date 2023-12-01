@@ -53,10 +53,29 @@ The evaluation results will be saved in `"path_output"/results_eval/evaluation_3
 
 This directory contains the following components:
 
-- **Conversion Script**: This script is responsible for converting the Touching Myelin Boundary Detection Dataset from the BIDS format to the format expected by nnUNetv2. To run execute the following command: 
+- **Conversion Script**: This script, `convert_from_bids_to_nnunetv2_format.py`, is responsible for converting the SEM segmentation dataset from the BIDS format to the format expected by nnUNetv2. The script requires two arguments: the path to the original dataset and the target directory for the new dataset. Here is an example of how to run the script:
 ```bash
 python scripts/convert_from_bids_to_nnunetv2_format.py <PATH/TO/ORIGINAL/DATASET> --TARGETDIR <PATH/TO/NEW/DATASET>
 ```
+For more information about the script and its additional arguments, run the script with the `-h` flag:
+```bash
+python scripts/convert_from_bids_to_nnunetv2_format.py -h
+```
+- **Setup Script**: This script sets up the nnUNet environment and runs the preprocessing and dataset integrity verification. To run execute the following command: 
+```bash
+source nn_unet_scripts/setup_nnunet.sh <PATH/TO/ORIGINAL/DATASET> <PATH/TO/SAVE/RESULTS> [DATASET_ID] [LABEL_TYPE] [DATASET_NAME]
+```
+- **Training Script**: This script is used to train the nnUNet model. It requires four arguments:
+    - `DATASET_ID`: The ID of the dataset to be used for training. This should be an integer.
+    - `DATASET_NAME`: The name of the dataset. This will be used to form the full dataset name in the format "DatasetNUM_DATASET_NAME".
+    - `DEVICE`: The device to be used for training. This could be a GPU device ID or 'cpu' for CPU, 'mps' for M1/M2 or 'cuda' for any GPU.
+    - `FOLDS`: The folds to be used for training. This should be a space-separated list of integers.
+To run the training script, execute the following command:
+```bash
+./nn_unet_scripts/train_nnunet.sh <DATASET_ID> <DATASET_NAME> <DEVICE> <FOLDS...>
+```
+
+
 - **Train Test Split File**: This file is a JSON file that contains the training and testing split for the dataset. It is used by the conversion script above. The file should be named `train_test_split.json` and placed in the same directory as the dataset.
 
 
@@ -91,5 +110,17 @@ conda activate sem_seg
 
 2. To train the model, first, you need to set up nnUNet and preprocess the dataset. This can be done by running the setup script:
 ```bash
-source nn_unet_scripts/setup_nnunet.sh <PATH/TO/ORIGINAL/DATASET> <PATH/TO/SAVE/RESULTS>
+source nn_unet_scripts/setup_nnunet.sh <PATH/TO/ORIGINAL/DATASET> <PATH/TO/SAVE/RESULTS> [DATASET_ID] [LABEL_TYPE] [DATASET_NAME]
+```
+
+### Training nnUNet
+
+After setting up the nnUNet and preprocessing the dataset, you can train the model using the training script. The script requires the following arguments:
+- `DATASET_ID`: The ID of the dataset to be used for training. This should be an integer.
+- `DATASET_NAME`: The name of the dataset. This will be used to form the full dataset name in the format "DatasetNUM_DATASET_NAME".
+- `DEVICE`: The device to be used for training. This could be a GPU device ID or 'cpu' for CPU, 'mps' for M1/M2 or 'cuda' for any GPU.
+- `FOLDS`: The folds to be used for training. This should be a space-separated list of integers.
+To run the training script, execute the following command:
+```bash
+./nn_unet_scripts/train_nnunet.sh <DATASET_ID> <DATASET_NAME> <DEVICE> <FOLDS...>
 ```
