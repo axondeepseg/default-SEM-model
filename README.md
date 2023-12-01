@@ -124,3 +124,13 @@ To run the training script, execute the following command:
 ```bash
 ./nn_unet_scripts/train_nnunet.sh <DATASET_ID> <DATASET_NAME> <DEVICE> <FOLDS...>
 ```
+
+## Inference
+
+After training the model, you can perform inference using the following command:
+```bash
+python scripts/nn_unet_inference.py --path-dataset ${RESULTS_DIR}/nnUNet_raw/Dataset<FORMATTED_DATASET_ID>_<DATASET_NAME>/imagesTs --path-out <WHERE/TO/SAVE/RESULTS> --path-model ${RESULTS_DIR}/nnUNet_results/Dataset<FORMATTED_DATASET_ID>_<DATASET_NAME>/nnUNetTrainer__nnUNetPlans__2d/ --use-gpu --use-best-checkpoint
+```
+The `--use-best-checkpoint` flag is optional. If used, the model will use the best checkpoints for inference. If not used, the model will use the latest checkpoints. Based on empirical results, using the `--use-best-checkpoint` flag is recommended.
+
+Note: `<FORMATTED_DATASET_ID>` should be a three-digit number where 1 would become 001 and 23 would become 023.
