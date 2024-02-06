@@ -11,6 +11,7 @@
         "sample-V915": "sub-rat8"
     },
     "test": {
-        "sample-data15": "sub-rat6"
+        "sample-data15": "sub-rat6",
+        "whole-data": "humanC5BG2"
     }
 }
