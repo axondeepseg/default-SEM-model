@@ -14,6 +14,9 @@ axondeepseg -t SEM -i <IMG_PATH> -s <PIXEL_SIZE>
 The `-m` option can be omitted in this case because this is a default built-in model.
 
 ## Train and test (ivadomed)
+<details>
+  <summary>Instructions </summary>
+
 This model was trained and tested with [ivadomed](https://ivadomed.org). We recommend you install ivadomed in a virtual environment to reproduce the original training steps. The specific revision hash of the version used for training is documented in the *version_info.log* file.
 
 ### Clone this repository
@@ -26,6 +29,7 @@ git clone https://github.com/axondeepseg/default-SEM-model
 The SEM dataset used to train this model is hosted on GitHub [here](https://github.com/axondeepseg/data_axondeepseg_sem). The specific dataset revision hash used for training is documented in the *version_info.log* file.
 
 ### Train this model
+    
 To train the model, please first update the following fields in the aforementioned JSON configuration file:
 - `gpu_ids`: specific to your hardware
 - `path_output`: where the model will be saved
@@ -46,8 +50,12 @@ ivadomed --test -c path_to_config_file.json
 ```
 The evaluation results will be saved in `"path_output"/results_eval/evaluation_3Dmetrics.csv`
 
+</details>
 
 ## Train and test with nnUNetv2
+
+<details>
+  <summary>Instructions </summary>
 
 ### Structure of the `nn_unet_scripts` Directory
 
@@ -124,6 +132,8 @@ To run the training script, execute the following command:
 ```bash
 ./nn_unet_scripts/train_nnunet.sh <DATASET_ID> <DATASET_NAME> <DEVICE> <FOLDS...>
 ```
+
+</details>
 
 ## Inference
 
